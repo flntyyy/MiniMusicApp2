@@ -35,36 +35,26 @@ public class insurance {
         driver.findElement(By.xpath("//*[contains(text(),'Страхование путешественников')]")).click();
 
         driver.findElement(By.xpath("//img[contains(@src,'id=f6c836e1-5c5c-4367-b0d0-bbfb96be9c53')]")).click();
+        String winHandleBefore = driver.getWindowHandle();
+
+        for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
+        Wait<WebDriver> wait2 = new WebDriverWait(driver, 5, 1000);
+        wait.until(ExpectedConditions.visibilityOf(
+                driver.findElement(By.xpath("//*[contains(text(),'Минимальная')]"))));
+        driver.findElement(By.xpath("//*[contains(text(),'Минимальная')]")).click();
+        driver.findElement(By.xpath("//*[contains(text(),'Оформить')]")).click();
 
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h4[@class='modal-title']"))));
+        fillField(By.name("insured0_surname"), "SMIRNOVASASASASASDADADASASADADADADADQADADDADQDQ");
+        fillField(By.name("insured0_name"), "ALEKSANDR");
 
-        assertEquals("Заявка на добровольное медицинское страхование",
-                driver.findElement(By.xpath("//h4[@class='modal-title']")).getText());
-
-        fillField(By.name("LastName"), "Иванов");
-        fillField(By.name("FirstName"), "Иван");
-        fillField(By.name("MiddleName"), "Иванович");
-
-        new Select(driver.findElement(By.name("Region"))).selectByVisibleText("Москва");
-
-        fillField(By.name("Email"), "йцукенqwery");
-        fillField(By.name("Comment"), "test");
-
-
-        driver.findElement(By.cssSelector("input.checkbox")).click();
-        driver.findElement(By.id("button-m")).click();
-
-        assertEquals("Иванов", driver.findElement(By.name("LastName")).getAttribute("value"));
-        assertEquals("Иванович", driver.findElement(By.name("MiddleName")).getAttribute("value"));
-        assertEquals("Иван", driver.findElement(By.name("FirstName")).getAttribute("value"));
-        assertEquals("йцукенqwery", driver.findElement(By.name("Email")).getAttribute("value"));
-        assertEquals("test", driver.findElement(By.name("Comment")).getAttribute("value"));
-
-        assertEquals("Москва",
-                new Select(driver.findElement(By.name("Region"))).getAllSelectedOptions().get(0).getText());
-        assertEquals("Введите адрес электронной почты",
-                driver.findElement(By.xpath("//*[text()='Эл. почта']/..//span[@class='validation-error-text']")).getText());
+        assertEquals("SMIRNOVASASASASASDADADASASADADADADADQADADDADQDQ", driver.findElement(By.name("insured0_surname")).getAttribute("value"));
+        assertEquals("ALEKSANDR", driver.findElement(By.name("insured0_name")).getAttribute("value"));
+        driver.findElement(By.xpath("//*[contains(text(),'Продолжить')]")).click();
+        assertEquals("Заполнены не все обязательные поля",
+                driver.findElement(By.xpath("//div[contains(@ng-show, 'tryNext && myForm.$invalid')]")).getText());
     }
 
     @After
