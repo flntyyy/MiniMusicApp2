@@ -1,9 +1,13 @@
+package steps;
+
+import junit.framework.TestCase;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import util.TestProperties;
 
 import java.util.NoSuchElementException;
 import java.util.Properties;
@@ -12,9 +16,14 @@ import java.util.concurrent.TimeUnit;
 import static junit.framework.TestCase.assertEquals;
 
 
-public class BaseTest {
 
-    protected static WebDriver driver;
+public class BaseSteps {
+    public static WebDriver getDriver() {
+        return driver;
+    }
+
+
+    public static WebDriver driver;
     protected static String baseUrl;
     public static Properties properties = TestProperties.getInstance().getProperties();
 
@@ -39,6 +48,7 @@ public class BaseTest {
         System.out.println(baseUrl);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        driver.get(baseUrl);
 }
 
 
@@ -62,7 +72,7 @@ protected boolean isElementPresent (By by) {
         driver.findElement(locator).sendKeys(value);
     }
 protected void checkFillField (String value, By locator) {
-        assertEquals (value, driver.findElement(locator).getAttribute("value"));
+        TestCase.assertEquals (value, driver.findElement(locator).getAttribute("value"));
 }
 
 }

@@ -1,17 +1,18 @@
-
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import steps.BaseSteps;
 
 import static org.junit.Assert.*;
 
-public class InsuranceTest extends BaseTest {
+public class InsuranceTest extends BaseSteps {
 
 
     @Test
+@Ignore
     public void testInsurance() throws Exception {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//*[contains(text(),'Застраховать')]")).click();
