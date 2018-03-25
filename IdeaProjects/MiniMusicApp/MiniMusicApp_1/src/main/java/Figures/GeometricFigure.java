@@ -3,6 +3,9 @@ package Figures;
 
 public abstract class GeometricFigure {
 
+    public GeometricFigure(int radius) {
+    }
+
     public static void main(String[] args) {
         Triangle triangle = new Triangle(2,3,4);
         Square square = new Square(5);
@@ -22,9 +25,7 @@ public abstract class GeometricFigure {
     public int side3;
     public int side4;
 
-    public GeometricFigure (int radius) {
-        this.radius = radius;
-    }
+
 
     public GeometricFigure (int side1) {
         this.side1 = side1;
