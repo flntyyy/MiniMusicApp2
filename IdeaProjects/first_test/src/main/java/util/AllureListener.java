@@ -9,7 +9,7 @@ import steps.BaseSteps;
 public class AllureListener extends ru.yandex.qatools.allure.junit.AllureRunListener {
 
     @Override
-    public void testFailure (Failure failure) {
+    public void testFailure(Failure failure) {
 
         takeScreenShot();
         super.testFailure(failure);

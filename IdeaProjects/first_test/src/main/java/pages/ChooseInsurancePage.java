@@ -16,9 +16,9 @@ public class ChooseInsurancePage {
     @FindBy(xpath = "//span[@class='b-continue-btn'][contains(text(),'Оформить')]")
     public WebElement registrateButton;
 
-    public ChooseInsurancePage(WebDriver driver){
-        PageFactory.initElements(driver,this);
-        Wait<WebDriver> wait = new WebDriverWait(driver,10,1000);
+    public ChooseInsurancePage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        Wait<WebDriver> wait = new WebDriverWait(driver, 10, 1000);
         wait.until(ExpectedConditions.visibilityOf(minimalButton));
     }
 }

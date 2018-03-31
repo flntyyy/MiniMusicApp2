@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class TestProperties {
+    private static TestProperties INSTANCE = null;
     private final Properties properties = new Properties();
 
-    private static TestProperties INSTANCE = null;
-
-    private TestProperties(){
+    private TestProperties() {
         try {
             properties.load(new FileInputStream(new File("./" + "environment" + ".properties")));
         } catch (IOException e) {
@@ -19,7 +18,7 @@ public class TestProperties {
     }
 
     public static TestProperties getInstance() {
-        if (INSTANCE == null){
+        if (INSTANCE == null) {
             INSTANCE = new TestProperties();
         }
         return INSTANCE;

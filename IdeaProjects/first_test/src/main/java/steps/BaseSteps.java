@@ -13,25 +13,19 @@ import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import static junit.framework.TestCase.assertEquals;
-
-
 
 public class BaseSteps {
+    public static WebDriver driver;
+    public static Properties properties = TestProperties.getInstance().getProperties();
+    protected static String baseUrl;
+
     public static WebDriver getDriver() {
         return driver;
     }
 
-
     public static String getBaseUrl() {
         return baseUrl;
     }
-
-    public static WebDriver driver;
-    protected static String baseUrl;
-    public static Properties properties = TestProperties.getInstance().getProperties();
-
-
 
     @BeforeClass
     public static void setUp() throws Exception {
@@ -53,30 +47,31 @@ public class BaseSteps {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(baseUrl);
-}
-
-
-@AfterClass
-
-public static void tearDown() throws Exception {
-    driver.quit();
-}
-
-protected boolean isElementPresent (By by) {
-    try {
-        driver.findElement(by);
-        return true;
-    } catch (NoSuchElementException e) {
-        return false;
     }
+
+
+    @AfterClass
+
+    public static void tearDown() throws Exception {
+        driver.quit();
+    }
+
+    protected boolean isElementPresent(By by) {
+        try {
+            driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     protected void fillField(By locator, String value) {
         driver.findElement(locator).clear();
         driver.findElement(locator).sendKeys(value);
     }
-protected void checkFillField (String value, By locator) {
-        TestCase.assertEquals (value, driver.findElement(locator).getAttribute("value"));
-}
+
+    protected void checkFillField(String value, By locator) {
+        TestCase.assertEquals(value, driver.findElement(locator).getAttribute("value"));
+    }
 
 }

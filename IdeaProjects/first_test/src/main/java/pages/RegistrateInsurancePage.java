@@ -1,4 +1,5 @@
 package pages;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,50 +10,37 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegistrateInsurancePage {
 
-    @FindBy(name = "insured0_surname")
-    WebElement insuredSurname;
-
-    @FindBy(name = "insured0_name")
-    WebElement insuredName;
-
-    @FindBy(name = "insured0_birthDate")
-    WebElement insuredBirthDate;
-
-    @FindBy(name = "surname")
-    WebElement surname;
-
-    @FindBy(name = "name")
-    WebElement name;
-
-    @FindBy(name = "middlename")
-    WebElement middlename;
-
-    @FindBy(name = "birthDate")
-    WebElement birthDate;
-
     @FindBy(name = "female")
     public
     WebElement female;
-
-    @FindBy(name = "passport_series")
-    WebElement passportSeries;
-
-    @FindBy(name = "passport_number")
-    WebElement passportNumber;
-
-    @FindBy(name = "issueDate")
-    WebElement issueDate;
-
-    @FindBy(name = "issuePlace")
-    WebElement issuePlace;
-
     @FindBy(xpath = "//span[text()='Продолжить']")
     public
     WebElement nextReg;
-
     @FindBy(xpath = "//div[@ng-show='tryNext && myForm.$invalid'][text()='Заполнены не все обязательные поля']")
     public
     WebElement errorMassage;
+    @FindBy(name = "insured0_surname")
+    WebElement insuredSurname;
+    @FindBy(name = "insured0_name")
+    WebElement insuredName;
+    @FindBy(name = "insured0_birthDate")
+    WebElement insuredBirthDate;
+    @FindBy(name = "surname")
+    WebElement surname;
+    @FindBy(name = "name")
+    WebElement name;
+    @FindBy(name = "middlename")
+    WebElement middlename;
+    @FindBy(name = "birthDate")
+    WebElement birthDate;
+    @FindBy(name = "passport_series")
+    WebElement passportSeries;
+    @FindBy(name = "passport_number")
+    WebElement passportNumber;
+    @FindBy(name = "issueDate")
+    WebElement issueDate;
+    @FindBy(name = "issuePlace")
+    WebElement issuePlace;
 
     public RegistrateInsurancePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -129,10 +117,11 @@ public class RegistrateInsurancePage {
             case "Дата рождения страхователя":
                 return birthDate.getAttribute("value");
             case "Пол страхователя":
-                if (female.isSelected()){
+                if (female.isSelected()) {
                     return "";
+                } else {
+                    return "Неверный пол";
                 }
-                else {return "Неверный пол";}
             case "Серия паспорта":
                 return passportSeries.getAttribute("value");
             case "Номер паспорта":

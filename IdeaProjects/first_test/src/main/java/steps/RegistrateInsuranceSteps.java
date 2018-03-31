@@ -12,12 +12,12 @@ import static junit.framework.TestCase.assertTrue;
 public class RegistrateInsuranceSteps extends BaseSteps {
 
     @Step("Поле {0} заполняется значением {1}")
-    public void stepFillData(String field, String value){
+    public void stepFillData(String field, String value) {
         new RegistrateInsurancePage(driver).fillData(field, value);
     }
 
-    @Step ("Заполняются поля:")
-    public void stepFillData (HashMap<String, String> fields){
+    @Step("Заполняются поля:")
+    public void stepFillData(HashMap<String, String> fields) {
         fields.forEach(this::stepFillData);
     }
 
@@ -36,7 +36,7 @@ public class RegistrateInsuranceSteps extends BaseSteps {
     }
 
     @Step("Пол заполнен верно")
-    public void stepCheckMale(WebElement female){
+    public void stepCheckMale(WebElement female) {
         new RegistrateInsurancePage(driver).female.click();
         assertTrue("Неверно заполнен пол", female.isSelected());
     }

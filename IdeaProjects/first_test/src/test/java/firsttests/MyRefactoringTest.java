@@ -1,11 +1,10 @@
 package firsttests;
 
-import org.junit.Ignore;
 import org.junit.Test;
+import pages.ChooseInsurancePage;
 import pages.MainPage;
 import pages.RegistrateInsurancePage;
 import pages.TravelInsPage;
-import pages.ChooseInsurancePage;
 import steps.BaseSteps;
 
 public class MyRefactoringTest extends BaseSteps {
@@ -16,7 +15,7 @@ public class MyRefactoringTest extends BaseSteps {
 
     public void newInsuranceTest() throws InterruptedException {
 
-        MainPage mainPage =  new MainPage(driver);
+        MainPage mainPage = new MainPage(driver);
 
         //Открыть окно с выбором страховок, подождать и выбрать Страхование путешественников
         mainPage.selectMenuItem("Раздел Застраховать себя  и имущество");
@@ -24,7 +23,7 @@ public class MyRefactoringTest extends BaseSteps {
         mainPage.selectTravelersInsuranceSubMenu("Страхование путешественников");
 
         //Нажимаем на баннер
-        new TravelInsPage (driver).bannerZashitaTraveler.click();
+        new TravelInsPage(driver).bannerZashitaTraveler.click();
 
         //Переключаемся на страницу
         for (String winHandle : driver.getWindowHandles()) {
