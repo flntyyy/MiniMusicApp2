@@ -7,10 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-public class RegistateInsurancePage {
+public class RegistrateInsurancePage {
 
     @FindBy(name = "insured0_surname")
     WebElement insuredSurname;
@@ -34,6 +31,7 @@ public class RegistateInsurancePage {
     WebElement birthDate;
 
     @FindBy(name = "female")
+    public
     WebElement female;
 
     @FindBy(name = "passport_series")
@@ -49,24 +47,18 @@ public class RegistateInsurancePage {
     WebElement issuePlace;
 
     @FindBy(xpath = "//span[text()='Продолжить']")
+    public
     WebElement nextReg;
 
     @FindBy(xpath = "//div[@ng-show='tryNext && myForm.$invalid'][text()='Заполнены не все обязательные поля']")
+    public
     WebElement errorMassage;
 
-    public RegistateInsurancePage(WebDriver driver) {
+    public RegistrateInsurancePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         Wait<WebDriver> wait = new WebDriverWait(driver, 10, 1000);
         wait.until(ExpectedConditions.visibilityOf(birthDate));
         wait.until(ExpectedConditions.visibilityOf(nextReg));
-    }
-
-    public void clickButton() {
-        nextReg.click();
-    }
-
-    public void checkMessegeError() {
-        assertEquals("Отсутствует сообщение об ошибке", "Заполнены не все обязательные поля", errorMassage.getText());
     }
 
     public void fillData(String fieldName, String value) {
@@ -120,47 +112,38 @@ public class RegistateInsurancePage {
         element.sendKeys(value);//заполнение
     }
 
-    public void checkField(String checkFieldName) {
+    public String getCheckField(String checkFieldName) {
         switch (checkFieldName) {
             case "Фамилия застрахованного":
-                assertEquals("Неверно заполнено поле", "IVANOV", insuredSurname.getAttribute("value"));
-                break;
+                return insuredSurname.getAttribute("value");
             case "Имя застрахованного":
-                assertEquals("Неверно заполнено поле", "LEV", insuredName.getAttribute("value"));
-                break;
+                return insuredName.getAttribute("value");
             case "Дата рождения застрахованного":
-                assertEquals("Неверно заполнено поле", "01.01.2011", insuredBirthDate.getAttribute("value"));
-                break;
+                return insuredBirthDate.getAttribute("value");
             case "Фамилия страхователя":
-                assertEquals("Неверно заполнено поле", "Иванова1", surname.getAttribute("value"));
-                break;
+                return surname.getAttribute("value");
             case "Имя страхователя":
-                assertEquals("Неверно заполнено поле", "Елена", name.getAttribute("value"));
-                break;
+                return name.getAttribute("value");
             case "Отчество страхователя":
-                assertEquals("Неверно заполнено поле", "Петровна", middlename.getAttribute("value"));
-                break;
+                return middlename.getAttribute("value");
             case "Дата рождения страхователя":
-                assertEquals("Неверно заполнено поле", "02.02.1984", birthDate.getAttribute("value"));
-                break;
+                return birthDate.getAttribute("value");
             case "Пол страхователя":
-                assertTrue("Неверно заполнен пол", female.isSelected());
-                break;
+                if (female.isSelected()){
+                    return "";
+                }
+                else {return "Неверный пол";}
             case "Серия паспорта":
-                assertEquals("Неверно заполнено поле", "1234", passportSeries.getAttribute("value"));
-                break;
+                return passportSeries.getAttribute("value");
             case "Номер паспорта":
-                assertEquals("Неверно заполнено поле", "567890", passportNumber.getAttribute("value"));
-                break;
+                return passportNumber.getAttribute("value");
             case "Дата выдачи паспорта":
-                assertEquals("Неверно заполнено поле", "12.02.2010", issueDate.getAttribute("value"));
-                break;
+                return issueDate.getAttribute("value");
             case "Кем выдан":
-                assertEquals("Неверно заполнено поле", "Отделением ОВД по г. Москва", issuePlace.getAttribute("value"));
-                break;
-            default:
-                throw new AssertionError("Поле '" + checkFieldName + "' не объявлено на странице");
+                return issuePlace.getAttribute("value");
+
         }
+        throw new AssertionError("Поле не объявлено на странице");
 
 
     }

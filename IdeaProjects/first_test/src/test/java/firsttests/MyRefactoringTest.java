@@ -1,8 +1,9 @@
+package firsttests;
 
-
+import org.junit.Ignore;
 import org.junit.Test;
 import pages.MainPage;
-import pages.RegistateInsurancePage;
+import pages.RegistrateInsurancePage;
 import pages.TravelInsPage;
 import pages.ChooseInsurancePage;
 import steps.BaseSteps;
@@ -11,6 +12,7 @@ public class MyRefactoringTest extends BaseSteps {
 
 
     @Test
+
 
     public void newInsuranceTest() throws InterruptedException {
 
@@ -34,7 +36,7 @@ public class MyRefactoringTest extends BaseSteps {
         new ChooseInsurancePage(driver).registrateButton.click();
 
         //Заполняем форму
-        RegistateInsurancePage registateInsurancePage = new RegistateInsurancePage(driver);
+        RegistrateInsurancePage registateInsurancePage = new RegistrateInsurancePage(driver);
         registateInsurancePage.fillData("Фамилия застрахованного", "IVANOV");
         registateInsurancePage.fillData("Имя застрахованного", "LEV");
         registateInsurancePage.fillData("Дата рождения застрахованного", "01012011");
@@ -48,25 +50,21 @@ public class MyRefactoringTest extends BaseSteps {
         registateInsurancePage.fillData("Дата выдачи паспорта", "12022010");
         registateInsurancePage.fillData("Кем выдан", "Отделением ОВД по г. Москва");
         //Проверяем введенные поля
-        RegistateInsurancePage checkField = new RegistateInsurancePage(driver);
-        checkField.checkField("Фамилия застрахованного");
-        checkField.checkField("Имя застрахованного");
-        checkField.checkField("Дата рождения застрахованного");
-        checkField.checkField("Фамилия страхователя");
-        checkField.checkField("Имя страхователя");
-        checkField.checkField("Отчество страхователя");
-        checkField.checkField("Дата рождения страхователя");
-        checkField.checkField("Пол страхователя");
-        checkField.checkField("Серия паспорта");
-        checkField.checkField("Номер паспорта");
-        checkField.checkField("Дата выдачи паспорта");
-        checkField.checkField("Кем выдан");
+        RegistrateInsurancePage checkField = new RegistrateInsurancePage(driver);
+        checkField.getCheckField("Фамилия застрахованного");
+        checkField.getCheckField("Имя застрахованного");
+        checkField.getCheckField("Дата рождения застрахованного");
+        checkField.getCheckField("Фамилия страхователя");
+        checkField.getCheckField("Имя страхователя");
+        checkField.getCheckField("Отчество страхователя");
+        checkField.getCheckField("Дата рождения страхователя");
+        checkField.getCheckField("Пол страхователя");
+        checkField.getCheckField("Серия паспорта");
+        checkField.getCheckField("Номер паспорта");
+        checkField.getCheckField("Дата выдачи паспорта");
+        checkField.getCheckField("Кем выдан");
 
-        //Нажимаем на кнопку продолжить
-        RegistateInsurancePage clickButtonNext = new RegistateInsurancePage(driver);
-        clickButtonNext.clickButton();
-        //Проверить сообщение о ошибке
-        clickButtonNext.checkMessegeError();
+
     }
 }
 

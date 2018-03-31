@@ -1,3 +1,5 @@
+package firsttests;
+
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +14,7 @@ public class InsuranceTest extends BaseSteps {
 
 
     @Test
-@Ignore
+    @Ignore
     public void testInsurance() throws Exception {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//*[contains(text(),'Застраховать')]")).click();

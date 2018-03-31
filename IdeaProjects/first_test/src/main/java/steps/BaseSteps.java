@@ -23,6 +23,10 @@ public class BaseSteps {
     }
 
 
+    public static String getBaseUrl() {
+        return baseUrl;
+    }
+
     public static WebDriver driver;
     protected static String baseUrl;
     public static Properties properties = TestProperties.getInstance().getProperties();
@@ -67,7 +71,7 @@ protected boolean isElementPresent (By by) {
     }
     }
 
-    void fillField(By locator, String value) {
+    protected void fillField(By locator, String value) {
         driver.findElement(locator).clear();
         driver.findElement(locator).sendKeys(value);
     }
